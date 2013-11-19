@@ -3,6 +3,7 @@
 
 #define Spitfire
 #define DRV8825
+//#define VIKI
 //#define DIRECT_DRIVE_EXTRUDER
 //#define SERIAL_COMPATIBILITY // Needed for some linux distros. Switches baudrate to 115200 for to maximise compatibility at the cost of some serial speed.
 
@@ -548,7 +549,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #endif
 
 // Panucatt VIKI LCD with status LEDs, integrated click & L/R/U/P buttons, separate encoder inputs
-//#define LCD_I2C_VIKI
+#ifdef VIKI
+  #define LCD_I2C_VIKI
+#endif
 #ifdef LCD_I2C_VIKI
   // This uses the LiquidTWI2 library v1.2.3 or later ( https://github.com/lincomatic/LiquidTWI2 )
   // Make sure the LiquidTWI2 directory is placed in the Arduino or Sketchbook libraries subdirectory.
