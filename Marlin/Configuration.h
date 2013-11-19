@@ -62,6 +62,7 @@
 // 80 = Rumba
 // 81 = Printrboard (AT90USB1286)
 // 82 = Brainwave (AT90USB646)
+// 82 = Azteeg X3 (AT90USB1286)
 // 9  = Gen3+
 // 70 = Megatronics
 // 701= Megatronics v2.0
@@ -78,13 +79,19 @@
     #ifdef __AVR_ATmega2560__
       #define MOTHERBOARD 34
     #else
-      #error Oops!  Make sure you have 'Sanguino W/ ATmega1284p 16mhz' for an X1 or 'Arduino Mega 2560' for an X3 selected from the 'Tools -> Boards' menu.
+      #ifdef __AVR_AT90USB1286__
+        #define MOTHERBOARD 83
+      #error Oops!  Make sure you have 'Sanguino W/ ATmega1284p 16mhz' for an X1, '[BootloaderCDC] Azteeg X2' for an X2 or 'Arduino Mega 2560' for an X3 selected from the 'Tools -> Boards' menu.
     #endif
   #endif
 #endif
 
 // Define this to set a custom name for your generic Mendel,
+#if MOTHERBOARD == 83
+ #define CUSTOM_MENDEL_NAME "Bukito"
+#else
  #define CUSTOM_MENDEL_NAME "Bukobot"
+#endif
 
 // This defines the number of extruders
 #if MOTHERBOARD == 34

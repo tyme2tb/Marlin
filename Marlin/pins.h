@@ -1411,7 +1411,7 @@
   http://www.pjrc.com/teensy/teensyduino.html
 * See http://reprap.org/wiki/Printrboard for more info
 ****************************************************************************************/
-#if MOTHERBOARD == 8 || MOTHERBOARD == 81
+#if MOTHERBOARD == 8 || MOTHERBOARD == 81 || MOTHERBOARD == 83
 #define KNOWN_BOARD 1
 #define AT90USB 1286  // Disable MarlinSerial etc.
 
@@ -1451,12 +1451,23 @@
   #define Z_STOP_PIN         15
   #define TEMP_0_PIN          7  // Extruder / Analog pin numbering
   #define TEMP_BED_PIN        6  // Bed / Analog pin numbering
-#else  // Printrboard
+#else  // Printrboard or Azteeg X2
   #define X_STOP_PIN         35
   #define Y_STOP_PIN          8
   #define Z_STOP_PIN         36
   #define TEMP_0_PIN          1  // Extruder / Analog pin numbering
   #define TEMP_BED_PIN        0  // Bed / Analog pin numbering
+#endif
+
+#if MOTHERBOARD == 83  // Azteeg X2
+  #define DIGIPOTSS_PIN 28
+  #define DIGIPOT_CHANNELS {1, 2, 3, 0} // X Y Z E digipot channels to stepper driver mapping
+  #undef X_ENABLE_PIN
+  #undef Y_ENABLE_PIN
+  #undef Y_STOP_PIN 
+  #define X_ENABLE_PIN       31
+  #define Y_ENABLE_PIN       30
+  #define Y_STOP_PIN          37
 #endif
 
 #define TEMP_1_PIN         -1
