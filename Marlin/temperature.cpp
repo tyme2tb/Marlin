@@ -1225,7 +1225,8 @@ ISR(TIMER0_COMPB_vect)
 #else
     if(current_temperature_raw[1] <= minttemp_raw[1]) {
 #endif
-        min_temp_error(1);
+        if(target_temperature[1]) //only trigger mintemp error on T1 if temperature is set to allow a single config for single and duo
+          min_temp_error(1);
     }
 #endif
 #if EXTRUDERS > 2
