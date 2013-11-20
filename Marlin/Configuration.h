@@ -3,7 +3,7 @@
 
 #define Spitfire
 #define DRV8825
-//#define VIKI
+//#define VIKI                // only successfully tested with Arduino 1.0.4
 //#define DIRECT_DRIVE_EXTRUDER
 //#define SERIAL_COMPATIBILITY // Needed for some linux distros. Switches baudrate to 115200 for to maximise compatibility at the cost of some serial speed.
 
@@ -550,6 +550,9 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 // Panucatt VIKI LCD with status LEDs, integrated click & L/R/U/P buttons, separate encoder inputs
 #ifdef VIKI
+  #if (ARDUINO != 104)
+    #error VIKI support has only been successfully tested with Arduino 1.0.4. Please use that version or disable VIKI support.
+  #endif
   #define LCD_I2C_VIKI
 #endif
 #ifdef LCD_I2C_VIKI
