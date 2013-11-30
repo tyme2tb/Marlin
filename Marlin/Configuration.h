@@ -5,7 +5,7 @@
 #define DRV8825
 //#define VIKI                // only successfully tested with Arduino 1.0.4
 //#define DIRECT_DRIVE_EXTRUDER
-//#define SERIAL_COMPATIBILITY // Needed for some linux distros. Switches baudrate to 115200 for to maximise compatibility at the cost of some serial speed.
+//#define SERIAL_COMPATIBILITY // Needed for some linux distros. Switches baudrate to 115200 to maximise compatibility at the cost of some serial speed.
 
 // This configurtion file contains the basic settings.
 // Advanced settings can be found in Configuration_adv.h 

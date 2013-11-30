@@ -1461,7 +1461,7 @@
 
 #if MOTHERBOARD == 83  // Azteeg X2
   #define DIGIPOTSS_PIN 28
-  #define DIGIPOT_CHANNELS {1, 2, 3, 0} // X Y Z E digipot channels to stepper driver mapping
+  #define DIGIPOT_CHANNELS {0x10, 0x60, 0x70, 0x00} // X Y Z E digipot channels to stepper driver mapping for MCP4331/41 digipots
   #undef X_ENABLE_PIN
   #undef Y_ENABLE_PIN
   #undef Y_STOP_PIN 
