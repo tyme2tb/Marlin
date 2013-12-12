@@ -1,8 +1,9 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-#define Spitfire
+#define SPITFIRE
 #define DRV8825
+//#define TATSU_MINI
 //#define VIKI                // only successfully tested with Arduino 1.0.4
 //#define DIRECT_DRIVE_EXTRUDER
 //#define SERIAL_COMPATIBILITY // Needed for some linux distros. Switches baudrate to 115200 to maximise compatibility at the cost of some serial speed.
@@ -188,7 +189,7 @@
   #define PID_dT ((16.0 * 8.0)/(F_CPU / 64.0 / 256.0)) //sampling period of the temperature routine
 
 // If you are using a preconfigured hotend then you can use one of the value sets by uncommenting it
-#ifdef Spitfire
+#ifdef SPITFIRE
 // Spitfire
     #define  DEFAULT_Kp 8.29
     #define  DEFAULT_Ki 0.37
@@ -408,7 +409,11 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #ifndef DIRECT_DRIVE_EXTRUDER
     #define DEFAULT_AXIS_STEPS_PER_UNIT   {111.98,111.98,6400,630}  // 1/32-step for X/Y/Z, 1/8-step for 14:1 extruder
   #else
-    #define DEFAULT_AXIS_STEPS_PER_UNIT   {111.98,111.98,6400,185.2}  // 1/32-step for all axes with direct-drive extruder 
+    #ifndef TATSU_MINI
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   {111.98,111.98,6400,185.2}  // 1/32-step for all axes with direct-drive extruder 
+    #else
+      #define DEFAULT_AXIS_STEPS_PER_UNIT   {111.98,111.98,6400,238}  // 1/32-step for all axes with direct-drive extruder 
+    #endif
   #endif
 #endif
 
