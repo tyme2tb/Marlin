@@ -84,6 +84,7 @@
     #else
       #ifdef __AVR_AT90USB1286__
         #define MOTHERBOARD 83
+        #error This firmware is not currently working with the X2 controller. Please download the Bukito version instead.
       #else
         #error Oops!  Make sure you have 'Sanguino W/ ATmega1284p 16mhz' for an X1, '[BootloaderCDC] Azteeg X2' for an X2 or 'Arduino Mega 2560' for an X3 selected from the 'Tools -> Boards' menu.
       #endif
