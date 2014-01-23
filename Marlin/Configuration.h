@@ -84,7 +84,12 @@
     #else
       #ifdef __AVR_AT90USB1286__
         #define MOTHERBOARD 83
-        #error This firmware is not currently working with the X2 controller. Please download the Bukito version instead.
+        //if we're using an X2, apply Bukito settings...
+          #define SPITFIRE
+          #define DRV8825
+          #define SMD_BED_THERMISTOR
+          #define TATSU_MINI
+          #define DIRECT_DRIVE_EXTRUDER
       #else
         #error Oops!  Make sure you have 'Sanguino W/ ATmega1284p 16mhz' for an X1, '[BootloaderCDC] Azteeg X2' for an X2 or 'Arduino Mega 2560' for an X3 selected from the 'Tools -> Boards' menu.
       #endif
@@ -183,8 +188,8 @@
 // PID settings:
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 255 // limits current to nozzle while in bang-bang mode; 255=full current
-#define PID_MAX 255 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
+#define BANG_MAX 256 // limits current to nozzle while in bang-bang mode; 256=full current
+#define PID_MAX 256 // limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 256=full current
 #ifdef PIDTEMP
   //#define PID_DEBUG // Sends debug data to the serial port.
   //#define PID_OPENLOOP 1 // Puts PID in open loop. M104/M140 sets the output power from 0 to PID_MAX
@@ -326,12 +331,21 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #define DISABLE_Z false
 #define DISABLE_E false // For all extruders
 
-#define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
-#define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
-#define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
-#define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
-#define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
-#define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
+#if MOTHERBOARD == 83
+  #define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
+  #define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+  #define INVERT_Z_DIR true     // for Mendel set to false, for Orca set to true
+  #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
+  #define INVERT_E1_DIR true    // for direct drive extruder v9 set to true, for geared extruder set to false
+  #define INVERT_E2_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
+#else
+  #define INVERT_X_DIR true    // for Mendel set to false, for Orca set to true
+  #define INVERT_Y_DIR true    // for Mendel set to true, for Orca set to false
+  #define INVERT_Z_DIR false     // for Mendel set to false, for Orca set to true
+  #define INVERT_E0_DIR true   // for direct drive extruder v9 set to true, for geared extruder set to false
+  #define INVERT_E1_DIR false    // for direct drive extruder v9 set to true, for geared extruder set to false
+  #define INVERT_E2_DIR false   // for direct drive extruder v9 set to true, for geared extruder set to false
+#endif
 
 // ENDSTOP SETTINGS:
 // Sets direction of endstops when homing; 1=MAX, -1=MIN
@@ -377,12 +391,21 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #endif
 
 // Travel limits after homing
-#define X_MAX_POS 355
-#define X_MIN_POS 0
-#define Y_MAX_POS 205
-#define Y_MIN_POS 0
-#define Z_MAX_POS 210
-#define Z_MIN_POS 0
+#if MOTHERBOARD == 83
+  #define X_MAX_POS 140
+  #define X_MIN_POS 0
+  #define Y_MAX_POS 170
+  #define Y_MIN_POS 0
+  #define Z_MAX_POS 125
+  #define Z_MIN_POS 0
+#else
+  #define X_MAX_POS 355
+  #define X_MIN_POS 0
+  #define Y_MAX_POS 205
+  #define Y_MIN_POS 0
+  #define Z_MAX_POS 210
+  #define Z_MIN_POS 0
+#endif
 
 #define X_MAX_LENGTH (X_MAX_POS - X_MIN_POS)
 #define Y_MAX_LENGTH (Y_MAX_POS - Y_MIN_POS)

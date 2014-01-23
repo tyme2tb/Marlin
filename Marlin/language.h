@@ -32,13 +32,12 @@
 #elif MOTHERBOARD == 77
 	#define MACHINE_NAME "3Drag"
 	#define FIRMWARE_URL "http://3dprint.elettronicain.it/"
+#elif MOTHERBOARD == 83
+	#define MACHINE_NAME "Bukito"
+	#define FIRMWARE_URL "http://bukobot.com/bukito-marlin-configuration"
 #else
-	#ifdef CUSTOM_MENDEL_NAME
-		#define MACHINE_NAME CUSTOM_MENDEL_NAME
-	#else
-		#define MACHINE_NAME "Mendel"
-	#endif
-	#define FIRMWARE_URL "http://www.mendel-parts.com"
+	#define MACHINE_NAME "Bukobot"
+	#define FIRMWARE_URL "http://bukobot.com/bukobot-marlin-configuration"
 #endif
 
 #define STRINGIFY_(n) #n
