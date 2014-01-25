@@ -3,7 +3,7 @@
 
 #define SPITFIRE
 #define DRV8825
-#define SMD_BED_THERMISTOR
+//#define SMD_BED_THERMISTOR
 //#define TATSU_MINI
 //#define VIKI                // only successfully tested with Arduino 1.0.4
 //#define DIRECT_DRIVE_EXTRUDER
