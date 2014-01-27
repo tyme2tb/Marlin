@@ -78,9 +78,13 @@
 #ifndef MOTHERBOARD
   #ifdef __AVR_ATmega1284P__
     #define MOTHERBOARD 62
+    #define MACHINE_NAME "Bukobot V2.1"
+    #define FIRMWARE_URL "http://bukobot.com/marlin"
   #else
     #ifdef __AVR_ATmega2560__
       #define MOTHERBOARD 34
+      #define MACHINE_NAME "Bukobot V2.1"
+      #define FIRMWARE_URL "http://bukobot.com/marlin"
     #else
       #ifdef __AVR_AT90USB1286__
         #define MOTHERBOARD 83
@@ -90,18 +94,13 @@
           #define SMD_BED_THERMISTOR
           #define TATSU_MINI
           #define DIRECT_DRIVE_EXTRUDER
+          #define MACHINE_NAME "Bukito V1"
+          #define FIRMWARE_URL "http://bukobot.com/marlin"
       #else
         #error Oops!  Make sure you have 'Sanguino W/ ATmega1284p 16mhz' for an X1, '[BootloaderCDC] Azteeg X2' for an X2 or 'Arduino Mega 2560' for an X3 selected from the 'Tools -> Boards' menu.
       #endif
     #endif
   #endif
-#endif
-
-// Define this to set a custom name for your generic Mendel,
-#if MOTHERBOARD == 83
- #define CUSTOM_MENDEL_NAME "Bukito"
-#else
- #define CUSTOM_MENDEL_NAME "Bukobot"
 #endif
 
 // This defines the number of extruders
