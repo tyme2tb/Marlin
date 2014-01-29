@@ -97,7 +97,7 @@
           #define MACHINE_NAME "Bukito V1"
           #define FIRMWARE_URL "http://bukobot.com/marlin"
       #else
-        #error Oops!  Make sure you have 'Sanguino W/ ATmega1284p 16mhz' for an X1, '[BootloaderCDC] Azteeg X2' for an X2 or 'Arduino Mega 2560' for an X3 selected from the 'Tools -> Boards' menu.
+        #error Oops!  Make sure you have 'Bukito [Azteeg X2 /w BootloaderCDC]' for a Bukito, 'Arduino Mega 2560' for a Bukobot with X3 or 'Sanguino W/ ATmega1284p 16mhz' for an X1 selected from the 'Tools -> Boards' menu.
       #endif
     #endif
   #endif
