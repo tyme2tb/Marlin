@@ -2006,9 +2006,10 @@ void process_commands()
     #endif //BLINKM
     case 200: // M200 D<millimeters> set filament diameter and set E axis units to cubic millimeters (use S0 to set back to millimeters).
       {
-        float area;
-          float radius = code_value() / 2;
+        float area = .0;
+        float radius = .0;
         if(code_seen('D')) {
+          radius = (float)code_value() * .5;
           if(radius == 0) {
             area = 1;
           } else {
