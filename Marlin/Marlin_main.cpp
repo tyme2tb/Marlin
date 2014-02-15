@@ -225,10 +225,10 @@ int EtoPPressure=0;
 #endif
 
 #ifdef FWRETRACT
-  bool autoretract_enabled=true;
+  bool autoretract_enabled=false;
   bool retracted=false;
-  float retract_length=3, retract_feedrate=17*60, retract_zlift=0.8;
-  float retract_recover_length=0, retract_recover_feedrate=8*60;
+  float retract_length=2, retract_feedrate=170*60, retract_zlift=0;
+  float retract_recover_length=0, retract_recover_feedrate=5*60;
 #endif
 
 #ifdef ULTIPANEL
