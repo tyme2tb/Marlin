@@ -3081,7 +3081,7 @@ void manage_inactivity()
     controllerFan(); //Check if fan should be turned on to cool stepper drivers down
   #endif
   #ifdef EXTRUDER_RUNOUT_PREVENT
-    if( (millis() - previous_millis_cmd) > EXTRUDER_RUNOUT_SECONDS*1000 && is_homing )
+    if( (millis() - previous_millis_cmd) > EXTRUDER_RUNOUT_SECONDS*1000 && !is_homing )
     if(degHotend(active_extruder)>EXTRUDER_RUNOUT_MINTEMP)
     {
      bool oldstatus=READ(E0_ENABLE_PIN);
