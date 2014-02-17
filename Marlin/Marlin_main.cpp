@@ -227,8 +227,11 @@ int EtoPPressure=0;
 #ifdef FWRETRACT
   bool autoretract_enabled=false;
   bool retracted=false;
-  float retract_length=2, retract_feedrate=170*60, retract_zlift=0;
-  float retract_recover_length=0, retract_recover_feedrate=5*60;
+  float retract_length = RETRACT_LENGTH;
+  float retract_feedrate = RETRACT_FEEDRATE;
+  float retract_zlift = RETRACT_ZLIFT;
+  float retract_recover_length = RETRACT_RECOVER_LENGTH;
+  float retract_recover_feedrate = RETRACT_RECOVER_FEEDRATE;
 #endif
 
 #ifdef ULTIPANEL
@@ -1022,39 +1025,41 @@ static void homeaxis(int axis) {
 }
 #define HOMEAXIS(LETTER) homeaxis(LETTER##_AXIS)
 
-void retract(bool retracting) {
-  if(retracting && !retracted) {
-    destination[X_AXIS]=current_position[X_AXIS];
-    destination[Y_AXIS]=current_position[Y_AXIS];
-    destination[Z_AXIS]=current_position[Z_AXIS];
-    destination[E_AXIS]=current_position[E_AXIS];
-    current_position[E_AXIS]+=retract_length/volumetric_multiplier[active_extruder];
-    plan_set_e_position(current_position[E_AXIS]);
-    float oldFeedrate = feedrate;
-    feedrate=retract_feedrate;
-    retracted=true;
-    prepare_move();
-    current_position[Z_AXIS]-=retract_zlift;
-    plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
-    prepare_move();
-    feedrate = oldFeedrate;
-  } else if(!retracting && retracted) {
-    destination[X_AXIS]=current_position[X_AXIS];
-    destination[Y_AXIS]=current_position[Y_AXIS];
-    destination[Z_AXIS]=current_position[Z_AXIS];
-    destination[E_AXIS]=current_position[E_AXIS];
-    current_position[Z_AXIS]+=retract_zlift;
-    plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
-    //prepare_move();
-    current_position[E_AXIS]-=(retract_length+retract_recover_length)/volumetric_multiplier[active_extruder]; 
-    plan_set_e_position(current_position[E_AXIS]);
-    float oldFeedrate = feedrate;
-    feedrate=retract_recover_feedrate;
-    retracted=false;
-    prepare_move();
-    feedrate = oldFeedrate;
-  }
-} //retract
+#ifdef FWRETRACT
+  void retract(bool retracting) {
+    if(retracting && !retracted) {
+      destination[X_AXIS]=current_position[X_AXIS];
+      destination[Y_AXIS]=current_position[Y_AXIS];
+      destination[Z_AXIS]=current_position[Z_AXIS];
+      destination[E_AXIS]=current_position[E_AXIS];
+      current_position[E_AXIS]+=retract_length/volumetric_multiplier[active_extruder];
+      plan_set_e_position(current_position[E_AXIS]);
+      float oldFeedrate = feedrate;
+      feedrate=retract_feedrate;
+      retracted=true;
+      prepare_move();
+      current_position[Z_AXIS]-=retract_zlift;
+      plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+      prepare_move();
+      feedrate = oldFeedrate;
+    } else if(!retracting && retracted) {
+      destination[X_AXIS]=current_position[X_AXIS];
+      destination[Y_AXIS]=current_position[Y_AXIS];
+      destination[Z_AXIS]=current_position[Z_AXIS];
+      destination[E_AXIS]=current_position[E_AXIS];
+      current_position[Z_AXIS]+=retract_zlift;
+      plan_set_position(current_position[X_AXIS], current_position[Y_AXIS], current_position[Z_AXIS], current_position[E_AXIS]);
+      //prepare_move();
+      current_position[E_AXIS]-=(retract_length+retract_recover_length)/volumetric_multiplier[active_extruder]; 
+      plan_set_e_position(current_position[E_AXIS]);
+      float oldFeedrate = feedrate;
+      feedrate=retract_recover_feedrate;
+      retracted=false;
+      prepare_move();
+      feedrate = oldFeedrate;
+    }
+  } //retract
+#endif //FWRETRACT
 
 void process_commands()
 {
