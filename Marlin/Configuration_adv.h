@@ -390,7 +390,6 @@ const unsigned int dropsegments=5; //everything with less than this number of st
 // the moves are than replaced by the firmware controlled ones.
 
 #define FWRETRACT  //ONLY PARTIALLY TESTED
-#define MIN_RETRACT 0.1 //minimum extruded mm to accept a automatic gcode retraction attempt
 #ifdef FWRETRACT
   #define MIN_RETRACT 0.1                //minimum extruded mm to accept a automatic gcode retraction attempt
   #define RETRACT_LENGTH 3               //default retract length (positive mm)
