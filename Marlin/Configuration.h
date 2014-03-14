@@ -445,11 +445,20 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #endif
 #endif
 
-#ifdef VIKI
-  #define DEFAULT_MAX_FEEDRATE          {200, 200, 3.5, 45}    // (mm/sec), reduce maximum speed with VIKI enabled to prevent long screen update operations from causing skipping during fast travel
-#else  
-  #define DEFAULT_MAX_FEEDRATE          {500, 500, 3.5, 45}    // (mm/sec)    
+#ifndef DIRECT_DRIVE_EXTRUDER
+  #ifdef VIKI
+    #define DEFAULT_MAX_FEEDRATE          {200, 200, 3.5, 30}    // (mm/sec), reduce maximum speed with VIKI enabled to prevent long screen update operations from causing skipping during fast travel
+  #else  
+    #define DEFAULT_MAX_FEEDRATE          {500, 500, 3.5, 30}    // (mm/sec)    
+  #endif
+#else
+  #ifdef VIKI
+    #define DEFAULT_MAX_FEEDRATE          {200, 200, 3.5, 180}    // (mm/sec), reduce maximum speed with VIKI enabled to prevent long screen update operations from causing skipping during fast travel
+  #else  
+    #define DEFAULT_MAX_FEEDRATE          {500, 500, 3.5, 180}    // (mm/sec)    
+  #endif
 #endif
+
 #define DEFAULT_MAX_ACCELERATION      {800,800,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
 #define DEFAULT_ACCELERATION          3000    // X, Y, Z and E max acceleration in mm/s^2 for printing moves
