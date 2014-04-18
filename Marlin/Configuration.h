@@ -402,7 +402,7 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #define X_MIN_POS 0
   #define Y_MAX_POS 205
   #define Y_MIN_POS 0
-  #define Z_MAX_POS 210
+  #define Z_MAX_POS 201
   #define Z_MIN_POS 0
 #endif
 
