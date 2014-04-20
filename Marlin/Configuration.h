@@ -5,6 +5,7 @@
 #define DRV8825
 //#define SMD_BED_THERMISTOR
 //#define TATSU_MINI
+//#define FAST_SCREWS           //TR8*8 (experimental)
 //#define VIKI                // only successfully tested with Arduino 1.0.4
 //#define DIRECT_DRIVE_EXTRUDER
 //#define SERIAL_COMPATIBILITY // Needed for some linux distros. Switches baudrate to 115200 to maximise compatibility at the cost of some serial speed.
@@ -423,11 +424,15 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 
 //// MOVEMENT SETTINGS
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
-#define HOMING_FEEDRATE {50*60, 50*60, 3.5*60, 0}  // set the homing speeds (mm/min)
+#ifndef FAST_SCREWS
+  #define HOMING_FEEDRATE {50*60, 50*60, 3.5*60, 0}  // set the homing speeds (mm/min)
+#else
+  #define HOMING_FEEDRATE {50*60, 50*60, 30*60, 0}  // set the homing speeds (mm/min)
+#endif
 
 // default settings
 
-#ifndef DRV8825
+/*#ifndef DRV8825
   #ifndef DIRECT_DRIVE_EXTRUDER
     #define DEFAULT_AXIS_STEPS_PER_UNIT   {55.99,55.99,3200,1260}  // 1/16-step for all axes with 14:1 extruder
   #else
@@ -443,9 +448,46 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
       #define DEFAULT_AXIS_STEPS_PER_UNIT   {111.98,111.98,6400,238}  // 1/32-step for all axes with direct-drive extruder 
     #endif
   #endif
+#endif*/
+
+#ifndef DRV8825
+  #define XY_SPU 55.99
+#else
+  #define XY_SPU 111.98
 #endif
 
-#ifndef DIRECT_DRIVE_EXTRUDER
+#ifndef DRV8825
+  #define Z_SPU 3200
+#else
+  #ifndef FAST_SCREWS 
+    #define Z_SPU 6400
+  #else
+    #define Z_SPU 800
+  #endif
+#endif
+
+#ifndef DRV8825
+  #ifndef DIRECT_DRIVE_EXTRUDER
+    #define E_SPU 1260  // 1/16-step with 14:1 extruder
+  #else
+    #define E_SPU 92.6  // 1/16-step with direct-drive extruder
+  #endif
+#else
+  #ifndef DIRECT_DRIVE_EXTRUDER
+    #define E_SPU 630  // 1/8-step with 14:1 extruder
+  #else
+    #ifndef TATSU_MINI
+      #define E_SPU 185.2  // 1/32-step with direct-drive extruder 
+    #else
+      #define E_SPU 238  // 1/32-step with direct-drive extruder and Tatsu Mini
+    #endif
+  #endif
+#endif
+
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {XY_SPU, XY_SPU, Z_SPU, E_SPU}  // 1/16-step for all axes with 14:1 extruder
+
+
+/*#ifndef DIRECT_DRIVE_EXTRUDER
   #ifdef VIKI
     #define DEFAULT_MAX_FEEDRATE          {200, 200, 3.5, 30}    // (mm/sec), reduce maximum speed with VIKI enabled to prevent long screen update operations from causing skipping during fast travel
   #else  
@@ -457,7 +499,30 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
   #else  
     #define DEFAULT_MAX_FEEDRATE          {500, 500, 3.5, 180}    // (mm/sec)    
   #endif
+#endif*/
+
+
+#ifndef VIKI
+  #define XY_MAX_F 500
+#else
+  #define XY_MAX_F 200
 #endif
+
+#ifndef FAST_SCREWS
+  #define Z_MAX_F 3.5
+#else
+  #define Z_MAX_F 50
+#endif
+
+#ifndef DIRECT_DRIVE_EXTRUDER 
+  #define E_MAX_F 30
+#else
+  #define E_MAX_F 180
+#endif
+
+#define DEFAULT_MAX_FEEDRATE          {XY_MAX_F, XY_MAX_F, Z_MAX_F, E_MAX_F}    // (mm/sec)    
+
+
 
 #define DEFAULT_MAX_ACCELERATION      {800,800,100,10000}    // X, Y, Z, E maximum start speed for accelerated moves. E default values are good for skeinforge 40+, for older versions raise them a lot.
 
