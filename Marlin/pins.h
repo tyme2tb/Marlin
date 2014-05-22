@@ -395,6 +395,8 @@
 
   #define LARGE_FLASH true
   
+  #define BEEPER 33
+  
   #if MOTHERBOARD == 77
     #define X_STEP_PIN         54
     #define X_DIR_PIN          55
