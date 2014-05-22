@@ -66,7 +66,7 @@
 // 80 = Rumba
 // 81 = Printrboard (AT90USB1286)
 // 82 = Brainwave (AT90USB646)
-// 82 = Azteeg X3 (AT90USB1286)
+// 83 = Azteeg X2 (AT90USB1286)
 // 9  = Gen3+
 // 70 = Megatronics
 // 701= Megatronics v2.0
