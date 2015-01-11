@@ -97,6 +97,7 @@
           #define DIRECT_DRIVE_EXTRUDER
           #define MACHINE_NAME "Bukito V1"
           #define FIRMWARE_URL "http://bukobot.com/marlin"
+          #define BUKITO
       #else
         #error Oops!  Make sure you have 'Bukito [Azteeg X2 /w BootloaderCDC]' for a Bukito, 'Arduino Mega 2560' for a Bukobot with X3 or 'Sanguino W/ ATmega1284p 16mhz' for an X1 selected from the 'Tools -> Boards' menu.
       #endif
@@ -511,7 +512,11 @@ const bool Z_MAX_ENDSTOP_INVERTING = true; // set to true to invert the logic of
 #ifndef FAST_SCREWS
   #define Z_MAX_F 3.5
 #else
-  #define Z_MAX_F 50
+  #ifdef BUKITO
+    #define Z_MAX_F 50
+  #else
+    #define Z_MAX_F 30
+  #endif
 #endif
 
 #ifndef DIRECT_DRIVE_EXTRUDER 
