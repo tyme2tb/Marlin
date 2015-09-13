@@ -1493,7 +1493,7 @@ void process_commands()
     case 23: //M23 - Select file
       starpos = (strchr(strchr_pointer + 4,'*'));
       if(starpos!=NULL)
-        *(starpos-1)='\0';
+        *(starpos)='\0';
       card.openFile(strchr_pointer + 4,true);
       break;
     case 24: //M24 - Start SD print
@@ -1516,7 +1516,7 @@ void process_commands()
       if(starpos != NULL){
         char* npos = strchr(cmdbuffer[bufindr], 'N');
         strchr_pointer = strchr(npos,' ') + 1;
-        *(starpos-1) = '\0';
+        *(starpos) = '\0';
       }
       card.openFile(strchr_pointer+4,false);
       break;
@@ -1531,7 +1531,7 @@ void process_commands()
         if(starpos != NULL){
           char* npos = strchr(cmdbuffer[bufindr], 'N');
           strchr_pointer = strchr(npos,' ') + 1;
-          *(starpos-1) = '\0';
+          *(starpos) = '\0';
         }
         card.removeFile(strchr_pointer + 4);
       }
@@ -1553,8 +1553,8 @@ void process_commands()
         namestartpos++; //to skip the '!'
         
       if(starpos!=NULL)
-        *(starpos-1)='\0';
-            
+        *(starpos)='\0';
+
       bool call_procedure=(code_seen('P'));
       
       if(strchr_pointer>namestartpos) 
@@ -1576,7 +1576,7 @@ void process_commands()
       if(starpos != NULL){
         char* npos = strchr(cmdbuffer[bufindr], 'N');
         strchr_pointer = strchr(npos,' ') + 1;
-        *(starpos-1) = '\0';
+        *(starpos) = '\0';
       }
       card.openLogFile(strchr_pointer+5);
       break;
@@ -1970,7 +1970,7 @@ void process_commands()
     case 117: // M117 display message
       starpos = (strchr(strchr_pointer + 5,'*'));
       if(starpos!=NULL)
-        *(starpos-1)='\0';
+        *(starpos)='\0';
       lcd_setstatus(strchr_pointer + 5);
       break;
     case 114: // M114
